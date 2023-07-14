@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const Joi = require('Joi');
+const Joi = require('joi');
 const validator = require('express-joi-validation').createValidator({});
 
 
