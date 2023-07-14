@@ -15,7 +15,7 @@ module.exports.userLogin = async (req, res) => {
         message: "user doesn't exist"
       });
     } else {
-      const isValid = bcrypt.compareSync(password, 10);
+      const isValid = bcrypt.compareSync(password, userExist.password);
 
       if (isValid) {
         const token = jwt.sign({ id: userExist._id, isAdmin: userExist, isAdmin }, 'jsonwebtoken');
@@ -33,7 +33,6 @@ module.exports.userLogin = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err)
     return res.status(400).json({
       status: 400,
       message: `${err}`
@@ -43,7 +42,6 @@ module.exports.userLogin = async (req, res) => {
 
 
 }
-
 
 
 

@@ -5,20 +5,21 @@ const userSchema = mongoose.Schema({
 
   fullname: {
     type: String,
-    required: true,
+    unique: true,
+    required: true
   },
   email: {
     type: String,
     unique: true,
-    required: true,
+    required: true
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   isAdmin: {
     type: Boolean,
-    default: false,
+    default: false
   },
   shippingAddress: {
     address: {
@@ -32,7 +33,7 @@ const userSchema = mongoose.Schema({
     isEmpty: {
       type: Boolean,
       default: true
-    },
+    }
   }
 
 
