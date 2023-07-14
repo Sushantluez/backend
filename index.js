@@ -5,9 +5,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
+mongoose.set('strictQuery', false)
 
-
-mongoose.connect('mongodb+srv://sushantlama49:moles900@cluster0.qywui5z.mongodb.net/Shopy').then((result) => {
+mongoose.connect('mongodb+srv://sushantlama49:Hunter25l@cluster0.qywui5z.mongodb.net/Shopy').then((result) => {
   app.listen(5000);
 
 }).catch((err) => {
