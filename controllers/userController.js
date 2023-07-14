@@ -3,8 +3,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
+
 module.exports.userLogin = async (req, res) => {
   const { email, password } = req.body;
+
 
   try {
     const userExist = await User.findOne({ email: email });
@@ -15,29 +17,36 @@ module.exports.userLogin = async (req, res) => {
         message: "user doesn't exist"
       });
     } else {
+
       const isValid = bcrypt.compareSync(password, userExist.password);
 
       if (isValid) {
-        const token = jwt.sign({ id: userExist._id, isAdmin: userExist, isAdmin }, 'jsonwebtoken');
+        const token = jwt.sign({ id: userExist._id, isAdmin: userExist.isAdmin }, 'jsonwebtoken');
         res.status(200).json({
           email,
           token,
+          isAdmin: userExist.isAdmin,
           shippingAddress: userExist.shippingAddress,
           fullname: userExist.fullname
         });
+
       } else {
         return res.status(404).json({
           status: 'error',
           message: "credential doesn't exist"
         });
       }
+
+
     }
+
+
+
   } catch (err) {
     return res.status(400).json({
       status: 400,
       message: `${err}`
     });
-
   }
 
 
