@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const checkfile = require('../middleware/filecheck')
+const checks = require('../middleware/checkUser')
 
 
-router.get('/', productController.getAllProducts);
-router.get('/product/:id', productController.getAllProducts);
+router.get('/', checkfile.fileCheck, productController.getAllProducts);
+router.get('/api/product/:id', productController.getAllProducts);
+router.post('/api/add/product', checks.checkUser, checkfile.fileCheck, productController.getAllProducts);
+router.delete('/api/remove/product/:id', checks.checkUser, productController.removeProduct);
 
 
 module.exports = router;
